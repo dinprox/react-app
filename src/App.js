@@ -1,7 +1,13 @@
+import React, { useState } from 'react';
 import logo from './logo.svg';
 import './App.css';
+import {Button, Display} from './reactComponents.js'
+
 
 function App() {
+  const [counter, fn] = useState(0);
+  const increaseCounter = (size) => fn(counter + size);
+
   return (
     <div className="App">
       <header className="App-header">
@@ -17,7 +23,11 @@ function App() {
         >
           Learn React
         </a>
+        <Button onClickFunc={increaseCounter} increment={5}/>
+        <Button onClickFunc={increaseCounter} increment={10}/>
+        <Display message={counter}/>
       </header>
+     
     </div>
   );
 }
