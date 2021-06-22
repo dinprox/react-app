@@ -1,12 +1,13 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
 import './index.css';
-import App from './GitHubCardsApp/App.js';
+// import App from './GitHubCardsApp/App.js';
+import App from './StartMatchGame/App.js';
 import reportWebVitals from './reportWebVitals';
 
 ReactDOM.render(
   <React.StrictMode>
-    <App title="GitHub Cards App"/>
+    <App/>
   </React.StrictMode>,
   document.getElementById('root')
 );

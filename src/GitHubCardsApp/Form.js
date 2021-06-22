@@ -1,6 +1,31 @@
-import React from 'react';
+import React, {useState} from 'react';
 import axios from 'axios';
 
+function BrowseForm (props){
+	const state = useState({
+		userName : '',
+	});
+
+	const handleSubmit = (event) => {
+		event.preventDefault();
+		console.log(state.userName);
+		axios.get(`https://api.github.com/users/${state.userName}`)
+		.then(({data})=>{
+			props.onSubmit(data);
+			state.userName = '';
+		});
+	};
+	
+	return (
+    	<form onSubmit={handleSubmit}>
+    	  <input type="text" placeholder="GitHub username" value={state.userName} onChange={event=> state.userName = event.target.value} required  /*ref={this.userNameInput}*//>
+        <button>Add card</button>
+    	</form>
+    );
+}
+
+/*
+// Component class version 
 class BrowseForm extends React.Component {
 
 	// userNameInput = React.createRef();
@@ -13,25 +38,20 @@ class BrowseForm extends React.Component {
 		console.log(this.state.userName);
 		axios.get(`https://api.github.com/users/${this.state.userName}`)
 		.then(({data})=>{
-				let profile = {
-					name : data.name,
-					company : data.company,
-					avatar_url : data.avatar_url
-				};
-
-				this.props.onSubmit(profile);
+			this.props.onSubmit(data);
+			this.setState({userName : ''});
 		});
 	};
 	
-
 	render() {
   	return (
     	<form onSubmit={this.handleSubmit}>
-    	  <input type="text" placeholder="GitHub username" value={this.state.userName} onChange={event=> this.setState({userName : event.target.value})} required  /*ref={this.userNameInput}*//>
+    	  <input type="text" placeholder="GitHub username" value={this.state.userName} onChange={event=> this.setState({userName : event.target.value})} required  />
         <button>Add card</button>
     	</form>
     );
   }
 }
+*/
 
 export default BrowseForm

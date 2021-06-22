@@ -2,16 +2,15 @@ import './App.css';
 import React from 'react';
 import CardList from './CardList';
 import BrowseForm from './Form'
-import {testData} from './data'
 
 class App extends React.Component {
 
     state = {
-        profiles : testData,
+        profiles : [],
         title : this.props.title
     };
 
-    addNewProfile = (profile) => {
+    addNewProfile = (profile) =>  {
         this.setState(prevState=>({
             profiles : [...prevState.profiles, profile]
         }));
